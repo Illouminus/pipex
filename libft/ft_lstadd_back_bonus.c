@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edouard <edouard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebaillot <ebaillot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 18:32:21 by edouard           #+#    #+#             */
-/*   Updated: 2024/02/18 11:38:55 by edouard          ###   ########.fr       */
+/*   Created: 2023/11/20 21:55:21 by edouard           #+#    #+#             */
+/*   Updated: 2023/12/21 13:28:01 by ebaillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "libft.h"
 
-bool check_args(int argc, char **argv)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (argc != 5)
-		return (false);
+	t_list	*last;
+
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	last = *lst;
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new;
 }

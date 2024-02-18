@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edouard <edouard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebaillot <ebaillot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 18:32:21 by edouard           #+#    #+#             */
-/*   Updated: 2024/02/18 11:38:55 by edouard          ###   ########.fr       */
+/*   Created: 2023/11/09 18:09:54 by edouard           #+#    #+#             */
+/*   Updated: 2024/02/15 17:49:55 by ebaillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "libft.h"
 
-bool check_args(int argc, char **argv)
+int	ft_isalnum(int c)
 {
-	if (argc != 5)
-		return (false);
+	return (ft_isdigit(c) || ft_isalpha(c));
 }

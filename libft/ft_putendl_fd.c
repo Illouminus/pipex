@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edouard <edouard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebaillot <ebaillot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 18:32:21 by edouard           #+#    #+#             */
-/*   Updated: 2024/02/18 11:38:55 by edouard          ###   ########.fr       */
+/*   Created: 2023/11/10 15:52:46 by edouard           #+#    #+#             */
+/*   Updated: 2023/12/21 13:33:13 by ebaillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "libft.h"
 
-bool check_args(int argc, char **argv)
+void	ft_putendl_fd(char *s, int fd)
 {
-	if (argc != 5)
-		return (false);
+	size_t	i;
+
+	if (!s || !fd)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+	write(fd, "\n", 1);
 }

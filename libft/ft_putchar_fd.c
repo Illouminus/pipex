@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edouard <edouard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebaillot <ebaillot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 18:32:21 by edouard           #+#    #+#             */
-/*   Updated: 2024/02/18 11:38:55 by edouard          ###   ########.fr       */
+/*   Created: 2023/11/10 15:38:08 by edouard           #+#    #+#             */
+/*   Updated: 2023/12/21 13:32:50 by ebaillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "libft.h"
 
-bool check_args(int argc, char **argv)
+void	ft_putchar_fd(char c, int fd)
 {
-	if (argc != 5)
-		return (false);
+	write(fd, &c, 1);
 }
