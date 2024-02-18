@@ -1,0 +1,11 @@
+.
+..
+.git
+.vscode
+1.txt
+2.txt
+Makefile
+include
+libft
+pipex
+src

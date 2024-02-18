@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include "../libft/libft.h"
 
-bool check_args(int argc, char **argv);
-
+// bool check_args(int argc, char **argv);
+void ft_free_tab(char **tab);
+char *get_path(char *cmd, char **env);
 #endif
