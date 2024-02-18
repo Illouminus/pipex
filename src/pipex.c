@@ -6,7 +6,7 @@
 /*   By: edouard <edouard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:32:23 by edouard           #+#    #+#             */
-/*   Updated: 2024/02/18 18:10:36 by edouard          ###   ########.fr       */
+/*   Updated: 2024/02/18 20:04:03 by edouard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void exec(char *cmd, char **env)
 	path = get_path(s_cmd[0], env);
 	if (execve(path, s_cmd, env) == -1)
 	{
-		ft_putstr_fd("pipex: command not found: ", 2);
-		ft_putendl_fd(s_cmd[0], 2);
+		perror("Error: execve failed");
 		free(path);
 		ft_free_tab(s_cmd);
 		exit(EXIT_FAILURE);
@@ -35,6 +34,11 @@ void parent(char **argv, int *fd_m, char **env)
 	int fd;
 
 	fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd == -1)
+	{
+		perror("Error opening file for writing");
+		exit(EXIT_FAILURE);
+	}
 	dup2(fd, 1);
 	dup2(fd_m[0], 0);
 	close(fd_m[1]);
@@ -49,8 +53,8 @@ void child(char **argv, int *fd_m, char **env)
 	fd = open(argv[1], O_RDONLY, 0777);
 	if (fd == -1)
 	{
-		ft_putstr_fd("Error: open failed\n", 2);
-		exit(-1);
+		perror("Error opening file for reading");
+		exit(EXIT_FAILURE);
 	}
 	dup2(fd, 0);
 	dup2(fd_m[1], 1);
@@ -66,20 +70,19 @@ int main(int argc, char **argv, char **env)
 
 	if (argc != 5)
 	{
-		printf("argc: %d\n", argc);
 		ft_putstr_fd("Error: wrong number of arguments\n", 2);
-		exit(-1);
+		exit(EXIT_FAILURE);
 	}
 	if (pipe(fd) == -1)
 	{
 		ft_putstr_fd("Error: pipe failed\n", 2);
-		exit(-1);
+		exit(EXIT_FAILURE);
 	}
 	pid = fork();
 	if (pid == -1)
 	{
 		ft_putstr_fd("Error: fork failed\n", 2);
-		exit(-1);
+		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
 		child(argv, fd, env);

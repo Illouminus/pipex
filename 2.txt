@@ -5,6 +5,7 @@
 1.txt
 2.txt
 Makefile
+bonus
 include
 libft
 pipex
