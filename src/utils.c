@@ -6,17 +6,11 @@
 /*   By: edouard <edouard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:32:21 by edouard           #+#    #+#             */
-/*   Updated: 2024/02/18 18:04:38 by edouard          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:01:51 by edouard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-
-// bool check_args(int argc, char **argv)
-//{
-//	if (argc != 5)
-//		return (false);
-// }
 
 char *get_name_var(char *name, char **env)
 {
@@ -53,7 +47,7 @@ char *get_path(char *cmd, char **env)
 	i = -1;
 	path = get_name_var("PATH", env);
 	allpath = ft_split(path, ':');
-	free((char *)path);
+
 	while (allpath[++i])
 	{
 		path_part = ft_strjoin(allpath[i], "/");
@@ -72,13 +66,14 @@ char *get_path(char *cmd, char **env)
 
 void ft_free_tab(char **tab)
 {
-	size_t i;
-
-	i = 0;
-	while (tab[i])
+	if (tab != NULL)
 	{
-		free(tab[i]);
-		i++;
+		size_t i = 0;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
 	}
-	free(tab);
 }
