@@ -6,7 +6,7 @@
 /*   By: edouard <edouard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:32:23 by edouard           #+#    #+#             */
-/*   Updated: 2024/02/19 15:45:11 by edouard          ###   ########.fr       */
+/*   Updated: 2024/03/11 19:18:44 by edouard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void exec(char *cmd, char **env)
 
 	s_cmd = ft_split(cmd, ' ');
 	path = get_path(s_cmd[0], env);
-	printf("path: %s\n", path);
-	printf("cmd: %s\n", s_cmd[0]);
 	if (execve(path, s_cmd, env) == -1)
 	{
 		perror("Error: execve failed");
@@ -41,8 +39,8 @@ void parent(char **argv, int *fd_m, char **env)
 		perror("Error opening file for writing");
 		exit(EXIT_FAILURE);
 	}
-	dup2(fd_m[0], 0);
-	dup2(fd, 1);
+	dup2(fd, STDOUT_FILENO);
+	dup2(fd_m[0], STDIN_FILENO);
 	close(fd_m[1]);
 	close(fd);
 	exec(argv[3], env);
@@ -57,8 +55,8 @@ void child(char **argv, int *fd_m, char **env)
 		perror("Error opening file for reading");
 		exit(EXIT_FAILURE);
 	}
-	dup2(fd, 0);
-	dup2(fd_m[1], 1);
+	dup2(fd, STDIN_FILENO);
+	dup2(fd_m[1], STDOUT_FILENO);
 	close(fd_m[0]);
 	close(fd);
 	exec(argv[2], env);

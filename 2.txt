@@ -1,1 +1,12 @@
-      15
+.
+..
+.git
+.vscode
+1.txt
+2.txt
+Makefile
+bonus
+include
+libft
+pipex
+src
